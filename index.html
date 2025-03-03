@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hậu MMO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: red;
+        }
+        .gift-box {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f1f1f1;
+            text-align: left;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>MMO <span style="color: red;">VN</span></h2>
+        <input type="text" id="giftInput" placeholder="Nhập link muốn lưu">
+        
+        <h3>Chọn loại Gift</h3>
+        <div class="gift-box">
+            <div><input type="radio" name="gift" value="100"> Gift 100</div>
+            <div><input type="radio" name="gift" value="500"> Gift 500</div>
+            <div><input type="radio" name="gift" value="1000"> Gift 1000</div>
+            <div><input type="radio" name="gift" value="check"> Check lại Link này</div>
+        </div>
+        <button onclick="saveGift()">Lưu link</button>
+        
+        <h3>Truy cập nhanh</h3>
+        <button onclick="openGift(100)">Add shortcut Gift 100</button>
+        <button onclick="openGift(500)">Add shortcut Gift 500</button>
+        <button onclick="openGift(1000)">Add shortcut Gift 1000</button>
+        
+    </div>
+
+    <script>
+        let giftLinks = {
+            100: "https://example.com/gift100",
+            500: "https://example.com/gift500",
+            1000: "https://example.com/gift1000",
+            "check": "https://example.com/check"
+        };
+
+        function saveGift() {
+            let inputLink = document.getElementById("giftInput").value;
+            let selectedGift = document.querySelector('input[name="gift"]:checked');
+            
+            if (!inputLink) {
+                alert("Vui lòng nhập link trước!");
+                return;
+            }
+            if (!selectedGift) {
+                alert("Vui lòng chọn loại Gift!");
+                return;
+            }
+            
+            let giftType = selectedGift.value;
+            giftLinks[giftType] = inputLink;
+            alert(`Đã lưu link cho Gift ${giftType}: ${inputLink}`);
+        }
+
+        function openGift(giftType) {
+            if (giftLinks[giftType]) {
+                window.open(giftLinks[giftType], "_blank");
+            } else {
+                alert("Chưa có link nào được lưu cho Gift này!");
+            }
+        }
+
+    </script>
+</body>
+</html>
